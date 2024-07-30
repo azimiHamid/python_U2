@@ -19,7 +19,7 @@ import random
 turtle_module.colormode(255)
 tim = turtle_module.Turtle()
 screen = turtle_module.Screen()
-screen.bgcolor('gray')
+# screen.bgcolor('gray')
 
 tim.hideturtle()
 tim.speed('fastest')
@@ -34,7 +34,7 @@ number_of_dots = 100
 
 
 for dot_count in range(1, number_of_dots + 1):
-    tim.dot(20, random.choice(color_list))
+    tim.dot(50, random.choice(color_list))
     tim.forward(50)
 
     if dot_count % 10 == 0:
