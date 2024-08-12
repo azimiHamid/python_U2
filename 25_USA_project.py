@@ -18,16 +18,6 @@ while len(guessed_states) < 50:
     answer_state = screen.textinput(title=f"{len(guessed_states)}/50 states correct", 
                                     prompt="What's another state's name? ").title()
 
-    if answer_state == "Exit":
-        missing_states = []
-        for state in all_states:
-            if state not in guessed_states:
-                missing_states.append(state)
-        
-        new_data = pandas.DataFrame(missing_states)
-        new_data.to_csv("./utils_25/states_to_learn.csv", index=False)
-        break
-    
     if answer_state in all_states:
         guessed_states.append(answer_state)
         t = turtle.Turtle()
@@ -38,13 +28,25 @@ while len(guessed_states) < 50:
         # t.write(answer_state)     # OR: t.write(state_data.state.item())
         t.write(state_data.state.item())
     else:
+        if answer_state == "Exit":
+            missing_states = [state for state in all_states if state not in guessed_states]
+            
+            new_data = pandas.DataFrame(missing_states, columns=['State'])
+            new_data.to_csv("./utils_25/states_to_learn.csv", index=False)
+            break
+        
         t = turtle.Turtle()
         t.color("red")
         t.hideturtle()
         t.write("OOPS! The state name you provided doesn't exist.", 
                 align="center", 
                 font=("Arial", 20, "bold"))
+        missing_states = [state for state in all_states if state not in guessed_states]
+        new_data = pandas.DataFrame(missing_states, columns=['State'])
+        new_data.to_csv("./utils_25/states_to_learn.csv", index=False)
         screen.exitonclick()
+        
+        
 
 # States to learn.csv
 
