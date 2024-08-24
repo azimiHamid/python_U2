@@ -18,10 +18,34 @@ my_label.config(text="Some Text")
 
 # Button
 def button_clicked():
-    print("Button clicked!")
+    my_label["text"] = input.get()
 
 button = Button(text="Click me", command=button_clicked)
 button.pack()
+
+button['text'] = "don't click"
+button.config(text='click here')
+
+
+
+# Entry
+input = Entry(width=30)
+input.pack()
+
+
+
+
+# listbox
+def listbox_used(event):
+    # gets current selection from listbox
+    print(listbox.get(listbox.curselection()))
+    
+listbox = Listbox(height=4)
+fruits = ["Apple", "Grape", "Banana", "Orange"]
+for fruit in fruits:
+    listbox.insert(fruits.index(fruit), fruit)
+listbox.bind("<<ListboxSelect>>", listbox_used)
+listbox.pack()
 
 
 
